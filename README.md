@@ -1,0 +1,2 @@
+# WanderLust
+Ai Trip Planner

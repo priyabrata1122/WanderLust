@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import { Link } from 'react-router-dom'
 
 function App() {
 
@@ -11,7 +12,9 @@ function App() {
           <h1>Explore the sights</h1>
           <h1>of the Azeros</h1>
           <h3>A place where nature and adventure unite</h3>
-          <button>Get started, it's free</button>
+          <Link to={'/createtrip'}>
+            <button>Get started, it's free</button>
+          </Link>
         </div>
       </div>
 

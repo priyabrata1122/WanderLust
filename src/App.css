@@ -1,0 +1,118 @@
+.app{
+  position: relative;
+  width: 96%;
+  height: 38rem;
+  top: 5.5rem;
+  left: 1.5rem;
+  border: 1px solid;
+  border-radius: 20px;
+  background-image: url('./assets/landscape.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.inside{
+  position: absolute;
+  /* border: 1px solid; */
+  top: 8rem;
+  left: 7rem;
+}
+
+.inside h1{
+  font-size: 4rem;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgb(255, 255, 255);
+}
+
+.inside h3{
+  font-size: 1.5rem;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: rgb(255, 255, 255);
+}
+
+.inside button{
+  position: relative;
+  top: 8rem;
+  border-radius: 8px;
+  height: 2.8rem;
+  width: 15.5rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+  background-color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.inside button:hover{
+  background-color: lightgray;
+  transform: scale(1.05);
+}
+
+.bottom{
+  position: relative;
+  width: 96%;
+  height: 25rem;
+  /* top: 2rem; */
+  left: 1.5rem;
+  /* border: 1px solid; */
+  border-radius: 20px;
+  margin-bottom: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom h2{
+  font-size: 4.5rem;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.bottom h4{
+  font-size: 1.8rem;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: gray;
+}
+
+.bottominside{
+  width: 100%;
+  /* border: 1px solid; */
+  display: flex;
+  justify-content: space-evenly;
+  position: relative;
+  top: 4rem;
+}
+
+.bottominside div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottominside h1{
+  font-weight: bold;
+  font-size: 1.5rem;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
+.bottominside h3{
+  font-size: 1.2rem;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.footer{
+  height: 4rem;
+  /* border: 1px solid; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: lightgray;
+}
+
+.footer h1{
+  font-size: 1.2rem;
+}

@@ -3,50 +3,50 @@ export const SelectTravelesList=[
         id:1,
         title:'Just Me',
         desc:'A sole traveles in exploration',
-        icon:'',
-        peple:'1 person'
+        peple:'1 person',
+        icon:'✈️'
     },
     {
         id:2,
         title:'A Couple',
         desc:'Two traveles in tandem',
-        icon:'',
-        peple:'2 people'
+        peple:'2 people',
+        icon:'🥂'
     },
     {
         id:3,
         title:'Family',
         desc:'A group of fun loving adv',
-        icon:'',
-        peple:'3-5 people'
+        peple:'3-5 people',
+        icon:'👨🏻‍👩🏻‍👧🏻'
     },
     {
         id:4,
         title:'Friends',
         desc:'A bunch of thrill-seeks',
-        icon:'',
-        peple:'5-10 people'
+        peple:'5-10 people',
+        icon:'👨🏻‍👩🏻‍👧🏻'
     }
 ]
 
 export const SelestBudgetOptions=[
     {
         id:1,
+        icon:'🪙',
         title:'Cheap',
         desc:'Stays consious of costs',
-        icon:''
     },
     {
         id:2,
+        icon:'💰',
         title:'Moderate',
         desc:'Keep cost on average side',
-        icon:''
     },
     {
         id:3,
+        icon:'💸',
         title:'Luxury',
         desc:'Dont worry about costs',
-        icon:''
     }
 ]
 

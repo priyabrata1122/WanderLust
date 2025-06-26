@@ -50,4 +50,4 @@ export const SelestBudgetOptions=[
     }
 ]
 
-export const AI_PROMPT='Generate Travel Plan for Location : {location}'
+export const AI_PROMPT=`Generate Travel Plan for Location : {location}`

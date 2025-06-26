@@ -12,7 +12,7 @@ function App() {
           <h1>Explore the sights</h1>
           <h1>of the Azeros</h1>
           <h3>A place where nature and adventure unite</h3>
-          <Link to={'/createtrip'}>
+          <Link to={'/CreateTrip'}>
             <button>Get started, it's free</button>
           </Link>
         </div>

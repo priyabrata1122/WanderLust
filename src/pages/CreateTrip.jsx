@@ -40,9 +40,9 @@ function CreateTrip() {
 
             <div>
                 <h2 className='text-xl my-3 font-medium'>What is your budget ?</h2>
-                 <div>
+                 {/* <div>
                     {SelestBudgetOptions.map}
-                 </div>
+                 </div> */}
             </div>
              
         </div>

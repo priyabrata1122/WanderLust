@@ -8,11 +8,11 @@ import Header from './component/Header.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Header />
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path='/' element={<App/>}/>
-        <Route path='/createtrip' element={<CreateTrip/>}/>
+        <Route path='/CreateTrip' element={<CreateTrip/>}/>
       </Routes>
     </BrowserRouter>
   </StrictMode>,

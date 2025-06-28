@@ -1,0 +1,17 @@
+.maindiv{
+    background-image: url('../assets/createTrip_back.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+}
+
+.insidediv{
+    position: relative;
+    width: 52%;
+    left: 42rem;
+    top: 2rem;
+    background-color: white;
+    border-radius: 20px;
+    padding: 1rem;
+
+}

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
 import { Input } from '../components/ui/input'
-import { SelestBudgetOptions , SelectTravelesList} from '../constants/options';
+import { SelestBudgetOptions , SelectTravelesList, AI_PROMPT} from '../constants/options';
 import '../styles/Style_createTrip.css';
+import { toast } from 'sonner';
+import { ai, model, config } from '../service/AIModal';
 
 function CreateTrip() {
 
@@ -17,16 +19,49 @@ function CreateTrip() {
         })
     } 
 
-    // useEffect(()=>{
-    //     console.log(formdata);
-    // },[formdata]);
+    useEffect(()=>{
+        console.log(formdata);
+    },[formdata]);
 
-    const generateTrip=()=>{
-        if(formdata?.noOfDays>5){
-            console.log("Pkease enter a small number");
+    const generateTrip=async ()=>{
+        if(formdata?.noOfDays>5 || !formdata?.location || !formdata?.budget || !formdata?.people || !formdata?.noOfDays){
+            toast("Please fill up Valid details")
             return;
         }
-        console.log(formdata);
+        const FINAL_PROMPT=AI_PROMPT
+        .replace('{location}',formdata?.location?.label)
+        .replace('{noOfDays}',formdata?.noOfDays)
+        .replace('{couple}',formdata?.people)
+        .replace('{budget}',formdata?.budget)
+        .replace('{noOfDays}',formdata?.noOfDays)
+
+        console.log(FINAL_PROMPT);
+
+        const contents = [
+            {
+            role: 'user',
+            parts: [
+                {
+                text: FINAL_PROMPT,
+                },
+            ],
+            },
+        ];
+
+        try {
+            const response = await ai.models.generateContentStream({
+            model,
+            config,
+            contents,
+            });
+
+            for await (const chunk of response) {
+            console.log(chunk.text);
+            }
+        } catch (err) {
+            console.error("Error generating trip:", err);
+            toast("Failed to generate trip");
+        }
     }
 
     return (
@@ -37,7 +72,7 @@ function CreateTrip() {
                 left: "1.5rem",
                 top:"5rem",
                 height:'57rem'
-            }} className='maindiv flex-1'>
+            }} className='maindiv'>
                 <h1
                 style={{
                     position:'fixed',

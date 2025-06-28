@@ -50,4 +50,4 @@ export const SelestBudgetOptions=[
     }
 ]
 
-export const AI_PROMPT=`Generate Travel Plan for Location : {location}`
+export const AI_PROMPT=`Generate Travel Plan for {location} : las Vegas for {noOfDays} days for {couple} with a {budget} budget, give me a hotels option list with hotel name , hotel address, price, hotel image URL , geo coordinates, ratings, description , and suggest itinerary with place name, place details, place image URL, geo coordinates, ticket pricing time to travel each of the location for {noOfDays} days with each day plan with best time to visit in JSON format`;

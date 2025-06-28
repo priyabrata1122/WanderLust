@@ -9,15 +9,24 @@ function CreateTrip() {
     const [formdata,setFormdata] = useState([]);
 
     const handleOnChange=(mname,value)=>{
+        
         setFormdata({
             ...formdata,
             [mname]:value
         })
-    }
+    } 
 
-    useEffect(()=>{
+    // useEffect(()=>{
+    //     console.log(formdata);
+    // },[formdata]);
+
+    const generateTrip=()=>{
+        if(formdata?.noOfDays>5){
+            console.log("Pkease enter a small number");
+            return;
+        }
         console.log(formdata);
-    },[formdata]);
+    }
 
     return (
         <div
@@ -55,7 +64,7 @@ function CreateTrip() {
                             handleOnChange('noOfDays',e.target.value)
                         }
                     }
-                    placeholder={'Ex.3'} type="number"></Input>
+                    placeholder={'Example - 3'} type="number"></Input>
                 </div>
 
                 <div className='mt-10'>
@@ -67,7 +76,9 @@ function CreateTrip() {
                                 onClick={()=>{
                                     handleOnChange('budget',items.title);
                                 }}
-                                key={index} className='p-4 border rounded-lg hover:shadow-lg cursor-pointer'>
+                                key={index} 
+                                className={`p-4 border rounded-lg hover:shadow-lg cursor-pointer
+                                ${formdata?.budget==items.title && 'shadow-lg border-black'}`}>
                                     <h1>{items.icon}</h1>
                                     <h1 className='text-2xl font-bold'>{items.title}</h1>
                                     <h4 className='text-l text-gray-500'>{items.desc}</h4>
@@ -86,7 +97,9 @@ function CreateTrip() {
                                 onClick={()=>{
                                     handleOnChange('people',items.peple)
                                 }}
-                                key={index} className='p-4 border rounded-lg hover:shadow-lg cursor-pointer'>
+                                key={index} 
+                                className={`p-4 border rounded-lg hover:shadow-lg cursor-pointer
+                                ${formdata?.people==items.peple && 'shadow-lg border-black'}`}>
                                     <h1>{items.icon}</h1>
                                     <h1 className='text-2xl font-bold'>{items.title}</h1>
                                     <h4 className='text-l text-gray-500'>{items.desc}</h4>
@@ -111,7 +124,7 @@ function CreateTrip() {
                     borderRadius:"5px",
                     marginBottom:'2rem',
                     cursor:'pointer'
-                }}>Gererate Trip</button>
+                }} onClick={()=>{generateTrip()}}>Gererate Trip</button>
             </div>
 
         </div>

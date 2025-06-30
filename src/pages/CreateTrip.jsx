@@ -1,15 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { use, useContext, useEffect, useState } from 'react'
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
 import { Input } from '../components/ui/input'
 import { SelestBudgetOptions , SelectTravelesList, AI_PROMPT} from '../constants/options';
 import '../styles/Style_createTrip.css';
 import { toast } from 'sonner';
 import { ai, model, config } from '../service/AIModal';
+import { FirebaseContext } from '../context/firebase';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 
 function CreateTrip() {
 
     const [place, setPlace] = useState();
     const [formdata,setFormdata] = useState([]);
+
+    const context=useContext(FirebaseContext);
+    // console.log(context);
+    const [user,setUser]=useState(null);
+
+    const [loading,setLoading]=useState(false);
 
     const handleOnChange=(mname,value)=>{
         
@@ -19,15 +28,18 @@ function CreateTrip() {
         })
     } 
 
-    useEffect(()=>{
-        console.log(formdata);
-    },[formdata]);
+    // useEffect(()=>{
+    //     console.log(formdata);
+    // },[formdata]);
 
     const generateTrip=async ()=>{
         if(formdata?.noOfDays>5 || !formdata?.location || !formdata?.budget || !formdata?.people || !formdata?.noOfDays){
             toast("Please fill up Valid details")
             return;
         }
+
+        setLoading(true);
+
         const FINAL_PROMPT=AI_PROMPT
         .replace('{location}',formdata?.location?.label)
         .replace('{noOfDays}',formdata?.noOfDays)
@@ -55,12 +67,67 @@ function CreateTrip() {
             contents,
             });
 
+            let fullText="";
+
             for await (const chunk of response) {
-            console.log(chunk.text);
-            }
+                fullText+=chunk.text;
+            } 
+
+            console.log(fullText);
+            await SaveAITrips(fullText);
+
+            toast("Trip generated and Saved");
         } catch (err) {
             console.error("Error generating trip:", err);
             toast("Failed to generate trip");
+        }
+        setLoading(false);
+    }
+
+    const SaveAITrips=async (Tripdata)=>{
+        
+        setLoading(true);
+
+        const user=JSON.parse(localStorage.getItem('user'));
+        const docId=Date.now().toString();
+        await setDoc(doc(context.db,"AITrips",docId),{
+            userSelection:formdata,
+            tripData:JSON.parse(Tripdata),
+            userEmail:user?.email,
+            id:docId
+        });
+
+        setLoading(false);
+    }
+
+    useEffect(()=>{
+        onAuthStateChanged(context.auth,user=>{
+            if(user){
+                setUser(user);
+            }
+            else{
+                setUser(null);
+            }
+        })
+    },[]);
+
+    console.log(user);
+
+    const handleOnClick=async ()=>{
+        if(user){
+            generateTrip();
+        }
+        else{
+            try{
+                await context.signIn();
+                setTimeout(() => {
+                    generateTrip();
+                }, 1000);
+            }
+            catch(err){
+                console.log("Sign in Failed", err);
+                toast("Sign In failed, Pleasae try again");
+            }
         }
     }
 
@@ -154,7 +221,16 @@ function CreateTrip() {
                     </div>
 
                     <div className=''>
-                        <button className='left-150 relative mb-3 border-black border-1 pt-1 pb-1 pl-2 pr-2 rounded-md text-lg bg-black text-white cursor-pointer' onClick={()=>{generateTrip()}}>Gererate Trip</button>
+                        {
+                            loading?
+                            <>
+                                <div className='left-150 w-30 relative mb-3  pt-1 pb-1 pl-2 pr-2 rounded-md text-lg bg-gray-500 text-white'>Loading...</div>
+                            </>
+                            :
+                            <>
+                                <button className='left-150 relative mb-3 pt-1 pb-1 pl-2 pr-2 rounded-md text-lg bg-black text-white cursor-pointer' onClick={()=>{handleOnClick()}}>Gererate Trip</button>
+                            </>
+                        }
                     </div>
                 </div>
         </div>
